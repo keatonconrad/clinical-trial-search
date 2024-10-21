@@ -62,5 +62,5 @@ def search():
 
 
 if __name__ == "__main__":
-    # index_data()
+    index_data()
     app.run(host="0.0.0.0", port=4000)
