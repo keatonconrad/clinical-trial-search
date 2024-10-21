@@ -8,10 +8,11 @@ const TableHeadCell: React.FC<{ children: React.ReactNode }> = ({
   return <th className="px-4 py-2">{children}</th>;
 };
 
-const TableRowCell: React.FC<{ children: React.ReactNode }> = ({
-  children,
-}) => {
-  return <td className="px-4 py-2">{children}</td>;
+const TableRowCell: React.FC<{
+  children: React.ReactNode;
+  className?: string;
+}> = ({ children, className }) => {
+  return <td className={`px-4 py-3 ${className || ''}`}>{children}</td>;
 };
 
 const StatusBadge: React.FC<{ status: string }> = ({ status }) => {
@@ -54,23 +55,21 @@ export const Table: React.FC<{ rows: Trial[] }> = ({ rows }) => {
           {rows.map((row) => (
             <tr
               key={row.protocolSection.identificationModule.nctId}
-              onClick={() => {
-                setFocusedTrial(row);
-              }}
+              onClick={() => setFocusedTrial(row)}
               className="hover:bg-gray-50 cursor-pointer transition"
             >
-              <TableRowCell>
+              <TableRowCell className="truncate">
                 {row.protocolSection.identificationModule.organization.fullName}
               </TableRowCell>
-              <TableRowCell>
+              <TableRowCell className="truncate">
                 {row.protocolSection.identificationModule.briefTitle}
               </TableRowCell>
-              <TableRowCell>
+              <TableRowCell className="whitespace-nowrap">
                 <StatusBadge
                   status={row.protocolSection.statusModule.overallStatus}
                 />
               </TableRowCell>
-              <TableRowCell>
+              <TableRowCell className="whitespace-nowrap">
                 {row.protocolSection.statusModule.startDateStruct.date}
               </TableRowCell>
             </tr>
