@@ -58,10 +58,10 @@ export const Table: React.FC<{ rows: Trial[] }> = ({ rows }) => {
               onClick={() => setFocusedTrial(row)}
               className="hover:bg-gray-50 cursor-pointer transition"
             >
-              <TableRowCell className="truncate">
+              <TableRowCell>
                 {row.protocolSection.identificationModule.organization.fullName}
               </TableRowCell>
-              <TableRowCell className="truncate">
+              <TableRowCell>
                 {row.protocolSection.identificationModule.briefTitle}
               </TableRowCell>
               <TableRowCell className="whitespace-nowrap">
