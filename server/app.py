@@ -2,9 +2,12 @@ import json
 
 from elasticsearch import Elasticsearch
 from flask import Flask, jsonify, request
+from flask_cors import CORS
 from tqdm import tqdm
 
 app = Flask(__name__)
+cors = CORS(app, resources={r"/*": {"origins": "*"}})
+
 es = Elasticsearch(
     "http://127.0.0.1:9200",
     request_timeout=30,
@@ -55,9 +58,7 @@ def search():
         body = {"query": {"match_all": {}}}
 
     response = es.search(index=INDEX_NAME, body=body, size=10)
-    return jsonify(
-        {"results": [hit["_source"].items() for hit in response["hits"]["hits"]]}
-    )
+    return jsonify({"results": [hit["_source"] for hit in response["hits"]["hits"]]})
 
 
 if __name__ == "__main__":
